@@ -8,7 +8,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "esbuild": "node build.js"
+    "esbuild": "node build.js",
+    "copy-assets": "node copy-assets.cjs"
   },
   "devDependencies": {
     "esbuild": "^0.25.9",
