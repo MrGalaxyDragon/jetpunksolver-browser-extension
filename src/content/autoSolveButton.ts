@@ -1,4 +1,4 @@
-import JetPunkConfig from "./JetPunkConfig";
+import JetPunkConfig from "./jetpunk/JetPunkConfig";
 
 const autoSolveButtonConfig = {
     'attributes': {
