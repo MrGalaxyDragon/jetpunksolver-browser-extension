@@ -7,6 +7,6 @@ export const PageType = {
     SUDDEN_DEATH_GAME: 'sd-game',
     TEXT_GAME: 'text-game',
     TILE_GAME: 'tile-game',
-};
+} as const;
 
 export type PageType = (typeof PageType)[keyof typeof PageType];
