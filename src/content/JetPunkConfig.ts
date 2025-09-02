@@ -1,3 +1,4 @@
 export default {
-    'startButtonQuerySelector': '#start-button'
+    'startButtonQuerySelector': '#start-button',
+    'gameGroupSelector': '.game-group',
 }

@@ -23,10 +23,9 @@ export function createAutoSolveButton(): HTMLButtonElement {
 
     modifyStartButtonHolder(startButton, autoSolveButton);
 
-    const gameGroupSelector = '.game-group';
     copyStyles(
-        `${gameGroupSelector} ${JetPunkConfig.startButtonQuerySelector}`, 
-        `${gameGroupSelector} #${autoSolveButtonConfig.attributes.id}`
+        `${JetPunkConfig.gameGroupSelector} ${JetPunkConfig.startButtonQuerySelector}`, 
+        `${JetPunkConfig.gameGroupSelector} #${autoSolveButtonConfig.attributes.id}`
     );
 
     return autoSolveButton;
