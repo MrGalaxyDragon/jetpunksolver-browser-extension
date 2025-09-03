@@ -52,7 +52,7 @@ export class DocumentFacade {
 
 	private typeStringToElement(element: HTMLInputElement, text: string): void {
 		if (text !== '') {
-			for (let char of text) {
+			for (const char of text) {
 				this.typeCharToElement(element, char);
 			}
 		} else {
