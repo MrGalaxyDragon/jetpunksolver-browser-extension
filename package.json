@@ -8,9 +8,9 @@
 	"main": "index.js",
 	"scripts": {
 		"build": "npm run esbuild && npm run copy-assets && npm run remove-empty-directories",
-		"esbuild": "node build.js",
-		"copy-assets": "node copy-assets.cjs",
-		"remove-empty-directories": "node remove-empty-directories.cjs"
+		"esbuild": "node scripts/build.js",
+		"copy-assets": "node scripts/copy-assets.cjs",
+		"remove-empty-directories": "node scripts/remove-empty-directories.cjs"
 	},
 	"devDependencies": {
 		"esbuild": "^0.25.9",
