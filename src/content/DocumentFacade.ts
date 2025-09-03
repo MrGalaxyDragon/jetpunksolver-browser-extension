@@ -5,6 +5,13 @@ export class DocumentFacade {
 
     constructor(private readonly document: Document) {}
 
+    public clickElement(querySelector: string): void {
+        const element = this.document.querySelector(querySelector);
+        if (element instanceof HTMLElement) {
+            element.click();
+        }
+    }
+
     public getPageVar(): PageVar {
         this.pageVar ??= this.findPageVar();
 
