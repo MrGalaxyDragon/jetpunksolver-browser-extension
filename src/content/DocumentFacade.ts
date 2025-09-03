@@ -1,3 +1,4 @@
+import Answer from './jetpunk/Answer';
 import PageVar from './jetpunk/PageVar';
 
 export class DocumentFacade {
@@ -18,6 +19,10 @@ export class DocumentFacade {
 
 	public doesElementExist(querySelector: string): boolean {
 		return this.document.querySelector(querySelector) !== null;
+	}
+
+	public getAnswers(): Answer[] {
+		return this.getPageVar().data.quiz.answers;
 	}
 
 	public getPageVar(): PageVar {

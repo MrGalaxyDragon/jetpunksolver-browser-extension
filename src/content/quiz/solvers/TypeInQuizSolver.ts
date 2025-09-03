@@ -3,13 +3,13 @@ import { QuizSolver } from './QuizSolver';
 
 export abstract class TypeInQuizSolver extends QuizSolver {
 	protected getQuestions(): string[] {
-		return this.documentFacade.getPageVar().data.quiz.answers.map((answer) => answer.id);
+		return this.documentFacade.getAnswers().map((answer) => answer.id);
 	}
 
 	protected getAnswers(question: string): string[] {
 		return this.documentFacade
-			.getPageVar()
-			.data.quiz.answers.filter((answer) => answer.id === question)
+			.getAnswers()
+			.filter((answer) => answer.id === question)
 			.map((answer) => answer.display);
 	}
 
