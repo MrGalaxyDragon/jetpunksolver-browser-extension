@@ -21,7 +21,7 @@ export abstract class TypeInQuizSolver<A extends TypeInQuizAnswer> extends QuizS
 
 	protected isQuestionSolved(question: string, answers: string[]): boolean {
 		return this.documentFacade.doesElementExist(
-			`[${JetPunkConfig.answerCssProperty}="${question}"]${JetPunkConfig.correctAnswerSelector}`
+			`[${JetPunkConfig.typeInQuizAttributeName}="${question}"]${JetPunkConfig.typeInQuizCorrectAnswerSelector}`
 		);
 	}
 }
