@@ -1,7 +1,7 @@
 import { defineConfig } from 'eslint/config';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import globals from 'globals';
-import js from '@eslint/js';
+import jseslint from '@eslint/js';
 import nounsanitized from 'eslint-plugin-no-unsanitized';
 import tseslint from 'typescript-eslint';
 
@@ -10,10 +10,8 @@ export default defineConfig([
 		files: ['**/*.js', '**/*.ts'],
 		languageOptions: { sourceType: 'module' },
 		plugins: {
-			js,
 			nounsanitized
 		},
-		extends: ['js/recommended'],
 		rules: {
 			'no-unused-vars': 'warn',
 			'no-undef': 'warn',
@@ -32,6 +30,7 @@ export default defineConfig([
 	{
 		ignores: ['dist/']
 	},
+	jseslint.configs.recommended,
 	...tseslint.configs.recommended,
 	eslintConfigPrettier
 ]);
