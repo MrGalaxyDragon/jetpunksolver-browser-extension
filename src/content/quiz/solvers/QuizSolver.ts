@@ -1,7 +1,8 @@
 import { DocumentFacade } from '../../DocumentFacade';
+import Answer from '../../jetpunk/answers/Answer';
 
-export abstract class QuizSolver {
-	constructor(protected readonly documentFacade: DocumentFacade) {}
+export abstract class QuizSolver<A extends Answer> {
+	constructor(protected readonly documentFacade: DocumentFacade<A>) {}
 
 	public solve(): boolean {
 		let solved = true;

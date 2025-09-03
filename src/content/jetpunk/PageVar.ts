@@ -1,10 +1,10 @@
-import Answer from './Answer';
+import Answer from './answers/Answer';
 import { PageType } from './PageType';
 
-export default interface PageVar {
+export default interface PageVar<A extends Answer> {
 	data: {
 		quiz: {
-			answers: Answer[];
+			answers: A[];
 		};
 	};
 	pageType: PageType;

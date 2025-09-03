@@ -1,7 +1,8 @@
+import TypeInQuizAnswer from '../../jetpunk/answers/TypeInQuizAnswer';
 import JetPunkConfig from '../../jetpunk/JetPunkConfig';
 import { QuizSolver } from './QuizSolver';
 
-export abstract class TypeInQuizSolver extends QuizSolver {
+export abstract class TypeInQuizSolver<A extends TypeInQuizAnswer> extends QuizSolver<A> {
 	protected getQuestions(): string[] {
 		return this.documentFacade.getAnswers().map((answer) => answer.id);
 	}
