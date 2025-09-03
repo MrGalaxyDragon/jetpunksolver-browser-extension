@@ -16,7 +16,15 @@ export default defineConfig([
 			'no-unsanitized': nounsanitized
 		},
 		rules: {
-			'no-unused-vars': 'warn',
+			'no-unused-vars': 'off',
+			'@typescript-eslint/no-unused-vars': [
+				'warn',
+				{
+					vars: 'all',
+					args: 'none',
+					ignoreRestSiblings: true
+				}
+			],
 			'no-undef': 'warn',
 			'no-unsanitized/method': 'error',
 			'no-unsanitized/property': 'error'
