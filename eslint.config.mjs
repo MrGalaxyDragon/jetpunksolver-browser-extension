@@ -10,7 +10,7 @@ export default defineConfig([
 		files: ['**/*.js', '**/*.ts'],
 		languageOptions: { sourceType: 'module' },
 		plugins: {
-			nounsanitized
+			'no-unsanitized': nounsanitized
 		},
 		rules: {
 			'no-unused-vars': 'warn',
