@@ -1,5 +1,5 @@
-import globals from 'globals';
 import { defineConfig } from 'eslint/config';
+import globals from 'globals';
 import js from '@eslint/js';
 import nounsanitized from 'eslint-plugin-no-unsanitized';
 import tseslint from 'typescript-eslint';
