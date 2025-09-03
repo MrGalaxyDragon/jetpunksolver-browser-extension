@@ -7,7 +7,6 @@
 	"type": "module",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
 		"build": "npm run esbuild && npm run copy-assets",
 		"esbuild": "node build.js",
 		"copy-assets": "node copy-assets.cjs"
