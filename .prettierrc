@@ -7,6 +7,7 @@
 	"semi": true,
 	"bracketSpacing": true,
 	"bracketSameLine": true,
+	"endOfLine": "crlf",
 	"overrides": [
 		{
 			"files": "*.json",
