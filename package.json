@@ -8,6 +8,7 @@
 	"main": "index.js",
 	"scripts": {
 		"check-format": "prettier --check . && eslint && tsc -noEmit",
+		"fix-format": "prettier --write .",
 		"build": "npm run esbuild && npm run copy-assets && npm run remove-empty-directories",
 		"esbuild": "node scripts/build.js",
 		"copy-assets": "node scripts/copy-assets.cjs",
