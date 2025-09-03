@@ -5,10 +5,6 @@ import { register } from '../quizSolverRegistry';
 import { QuizSolver } from './QuizSolver';
 
 export class ClickQuizSolver extends QuizSolver<ClickQuizAnswer> {
-	protected getQuestions(): string[] {
-		return this.documentFacade.getAnswers().map((answer) => answer.id);
-	}
-
 	protected getAnswers(question: string): string[] {
 		return [this.getAnswer(question)].filter((answer) => answer !== '');
 	}

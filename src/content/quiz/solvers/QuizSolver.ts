@@ -15,7 +15,9 @@ export abstract class QuizSolver<A extends Answer> {
 		return solved;
 	}
 
-	protected abstract getQuestions(): string[];
+	protected getQuestions(): string[] {
+		return this.documentFacade.getAnswers().map((answer) => answer.id);
+	}
 
 	protected solveQuestion(question: string): boolean {
 		const answers = this.getAnswers(question);
