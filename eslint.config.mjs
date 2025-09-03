@@ -1,4 +1,5 @@
 import { defineConfig } from 'eslint/config';
+import eslintConfigPrettier from 'eslint-config-prettier';
 import globals from 'globals';
 import js from '@eslint/js';
 import nounsanitized from 'eslint-plugin-no-unsanitized';
@@ -31,5 +32,6 @@ export default defineConfig([
 	{
 		ignores: ['dist/']
 	},
-	...tseslint.configs.recommended
+	...tseslint.configs.recommended,
+	eslintConfigPrettier
 ]);
