@@ -6,6 +6,9 @@ import nounsanitized from 'eslint-plugin-no-unsanitized';
 import tseslint from 'typescript-eslint';
 
 export default defineConfig([
+	jseslint.configs.recommended,
+	...tseslint.configs.recommended,
+	eslintConfigPrettier,
 	{
 		files: ['**/*.js', '**/*.ts'],
 		languageOptions: { sourceType: 'module' },
@@ -29,8 +32,5 @@ export default defineConfig([
 	},
 	{
 		ignores: ['dist/']
-	},
-	jseslint.configs.recommended,
-	...tseslint.configs.recommended,
-	eslintConfigPrettier
+	}
 ]);
