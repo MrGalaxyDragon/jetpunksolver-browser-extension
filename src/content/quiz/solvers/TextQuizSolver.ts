@@ -1,8 +1,7 @@
-import { PageType } from "../../jetpunk/PageType";
-import { register } from "../quizSolverRegistry";
-import { TypeInQuizSolver } from "./TypeInQuizSolver";
+import { PageType } from '../../jetpunk/PageType';
+import { register } from '../quizSolverRegistry';
+import { TypeInQuizSolver } from './TypeInQuizSolver';
 
-export class TextQuizSolver extends TypeInQuizSolver {
-}
+export class TextQuizSolver extends TypeInQuizSolver {}
 
 register(PageType.TEXT_GAME, TextQuizSolver);
