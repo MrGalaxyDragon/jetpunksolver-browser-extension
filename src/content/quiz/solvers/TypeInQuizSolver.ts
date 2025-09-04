@@ -3,6 +3,10 @@ import JetPunkConfig from '../../jetpunk/JetPunkConfig';
 import { QuizSolver } from './QuizSolver';
 
 export abstract class TypeInQuizSolver<A extends TypeInQuizAnswer> extends QuizSolver<A> {
+	protected getNextQuestion(index: number): string {
+		return this.answers[index].id;
+	}
+
 	protected getAnswers(question: string): string[] {
 		return this.documentFacade
 			.getAnswers()

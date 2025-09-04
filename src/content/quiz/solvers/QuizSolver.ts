@@ -2,12 +2,16 @@ import { DocumentFacade } from '../../DocumentFacade';
 import Answer from '../../jetpunk/answers/Answer';
 
 export abstract class QuizSolver<A extends Answer> {
-	constructor(protected readonly documentFacade: DocumentFacade<A>) {}
+	protected readonly answers: A[];
+
+	constructor(protected readonly documentFacade: DocumentFacade<A>) {
+		this.answers = this.documentFacade.getAnswers();
+	}
 
 	public solve(): boolean {
 		let solved = true;
-		const questions = this.getQuestions();
-		for (const question of questions) {
+		for (let i = 0; i < this.answers.length; i++) {
+			const question = this.getNextQuestion(i);
 			if (!this.solveQuestion(question)) {
 				solved = false;
 			}
@@ -15,9 +19,7 @@ export abstract class QuizSolver<A extends Answer> {
 		return solved;
 	}
 
-	protected getQuestions(): string[] {
-		return this.documentFacade.getAnswers().map((answer) => answer.id);
-	}
+	protected abstract getNextQuestion(index: number): string;
 
 	protected solveQuestion(question: string): boolean {
 		const answers = this.getAnswers(question);
