@@ -5,5 +5,6 @@ export default {
 	typeInQuizAttributeName: 'data-answer',
 	typeInQuizCorrectAnswerSelector: '.correct',
 	clickQuizAnswerSelectorPrefix: '#bubble-',
-	clickQuizCorrectAnswerSelector: '.green'
+	clickQuizCorrectAnswerSelector: '.green',
+	mapQuizAnswerSelectorPrefix: '#map-answer-'
 };
