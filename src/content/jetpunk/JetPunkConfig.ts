@@ -18,5 +18,7 @@ export default {
 	mapQuiz2CurrentQuestionSelector: '#map-header-text',
 	mapQuiz2AnswerSelectorPrefix: '#grid .svg-holder #',
 	mapQuiz2CorrectAnswerSelector: '.svg-correct',
-	mapQuiz2PointInPathSearchAttempts: 1000
+	mapQuiz2PointInPathSearchAttempts: 1000,
+	multipleChoiceQuizAnswerSelectorPrefix: '#choice-button-',
+	multipleChoiceQuizFinishButtonSelector: '.finish-mc'
 };
