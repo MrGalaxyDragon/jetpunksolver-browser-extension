@@ -29,17 +29,19 @@ To start automatically solving [JetPunk](https://www.jetpunk.com/) Quizzes, you 
     ```sh
     npm run build
     ```
+4.  To use this browser extension, go to your browser and into the extensions tab.
+    You can either go there by navigating through the options or by entering one of the following urls:
+    - `chrome://extensions/` for Google Chrome
+    - `edge://extensions/` for Microsoft Edge
+
+    Then, activate the **Developer mode** and click on **Load unpacked**.
+    Select the [dist](/dist) folder and apply.
+    
+    Tutorials for adding a browser extension in Developer mode can be found here:
+    - [browser extension for Google Chrome](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world)
+    - [browser extension for Microsoft Edge](https://learn.microsoft.com/en-us/microsoft-edge/extensions/getting-started/picture-viewer-popup-webpage)
 
 ### Usage
 
-To use this browser extension, go to your browser and into the extensions tab.
-You can either go there by navigating through the options or by entering one of the following urls:
-- `chrome://extensions/` for Google Chrome
-- `edge://extensions/` for Microsoft Edge
-
-Then, activate the **Developer mode** and click on **Load unpacked**.
-Select the [dist](/dist) folder and apply.
-
-Tutorials for adding a browser extension in Developer mode can be found here:
-- [browser extension for Google Chrome](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world)
-- [browser extension for Microsoft Edge](https://learn.microsoft.com/en-us/microsoft-edge/extensions/getting-started/picture-viewer-popup-webpage)
+On every [JetPunk](https://www.jetpunk.com/) Quiz page, there will now be an **Auto-Solve** button.
+You can click it and the Quiz will be automatically solved in a few seconds.
