@@ -55,6 +55,8 @@ function setAttributes(autoSolveButton: HTMLButtonElement): void {
 	for (const [key, value] of Object.entries(autoSolveButtonConfig.attributes)) {
 		autoSolveButton.setAttribute(key, value);
 	}
+
+	autoSolveButton.removeAttribute('disabled');
 }
 
 function setText(autoSolveButton: HTMLButtonElement): void {
