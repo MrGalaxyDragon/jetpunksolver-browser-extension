@@ -3,11 +3,12 @@ import PageVar from '../jetpunk/page-var/PageVar';
 import { PageType } from '../jetpunk/PageType';
 import { QuizSolver } from './solvers/QuizSolver';
 
-export type Constructor<T extends QuizSolver<unknown, PageVar> = QuizSolver<unknown, PageVar>> =
-	new (documentFacade: DocumentFacade<PageVar>) => T;
+export type Constructor<A, P extends PageVar, T extends QuizSolver<A, P> = QuizSolver<A, P>> = new (
+	documentFacade: DocumentFacade<P>
+) => T;
 
-export const registry = new Map<PageType, Constructor>();
+export const registry = new Map<PageType, Constructor<unknown, PageVar>>();
 
-export function register(name: PageType, ctor: Constructor) {
-	registry.set(name, ctor);
+export function register<A, P extends PageVar>(name: PageType, ctor: Constructor<A, P>) {
+	registry.set(name, ctor as unknown as Constructor<unknown, PageVar>);
 }
