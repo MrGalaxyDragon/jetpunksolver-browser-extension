@@ -7,7 +7,10 @@
 		"skipLibCheck": true,
 		"noImplicitAny": true,
 		"strictNullChecks": true,
-		"forceConsistentCasingInFileNames": true
+		"forceConsistentCasingInFileNames": true,
+		"typeRoots": [
+			"./node_modules"
+		]
 	},
 	"include": [
 		"src"
