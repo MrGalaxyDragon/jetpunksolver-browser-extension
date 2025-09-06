@@ -14,14 +14,14 @@ export abstract class QuizSolver<A, P extends PageVar> {
 		let solved = true;
 		for (let i = 0; i < this.answers.length; i++) {
 			const question = this.getNextQuestion(i);
-			if (this.solveQuestion(question)) {
-				if (i == this.answers.length - 1) {
-					this.endQuiz();
-				} else {
-					this.moveToNextQuestion();
-				}
-			} else {
+			if (!this.solveQuestion(question)) {
 				solved = false;
+			}
+
+			if (i == this.answers.length - 1) {
+				this.endQuiz();
+			} else {
+				this.moveToNextQuestion();
 			}
 		}
 		return solved;
