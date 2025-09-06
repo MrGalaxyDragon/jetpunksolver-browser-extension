@@ -20,5 +20,11 @@ export default {
 	mapQuiz2CorrectAnswerSelector: '.svg-correct',
 	mapQuiz2PointInPathSearchAttempts: 1000,
 	multipleChoiceQuizAnswerSelectorPrefix: '#choice-button-',
-	multipleChoiceQuizFinishButtonSelector: '.finish-mc'
+	multipleChoiceQuizFinishButtonSelector: '.finish-mc',
+	tileSelectQuizCurrentQuestionSelectorPrefix: '#questions-holder > div:nth-of-type(',
+	tileSelectQuizCurrentQuestionSelectorSuffix: ') .question-text',
+	tileSelectQuizAnswerSelectorPrefix: '#tile-',
+	tileSelectQuizNextQuestionButtonSelectorPrefix: '#question-',
+	tileSelectQuizNextQuestionButtonSelectorSuffix: '.ts-question .btn-next',
+	tileSelectQuizFinishButtonSelector: '.finish-tile'
 };

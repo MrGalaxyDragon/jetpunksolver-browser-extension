@@ -5,3 +5,4 @@ export * from './MapQuizSolver';
 export * from './MultipleChoiceQuizSolver';
 export * from './PictureQuizSolver';
 export * from './TextQuizSolver';
+export * from './TileSelectQuizSolver';
