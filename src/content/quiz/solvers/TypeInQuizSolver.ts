@@ -18,7 +18,7 @@ export abstract class TypeInQuizSolver<A extends TypeInQuizAnswer> extends Defau
 			.flatMap((answer) => this.getAnswerStringsFromAnswer(answer));
 	}
 
-	protected getAnswerStringsFromAnswer(answer: TypeInQuizAnswer): string[] {
+	protected getAnswerStringsFromAnswer(answer: A): string[] {
 		const answerStrings = [];
 
 		answerStrings.push(...this.getAnswerTypeIns(answer));
