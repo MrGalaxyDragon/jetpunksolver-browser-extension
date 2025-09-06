@@ -179,10 +179,12 @@ export class DocumentFacade<P extends PageVar> {
 			for (const char of text) {
 				this.typeCharToElement(element, char);
 			}
-		} else {
-			element.value = text;
 		}
+
+		element.value = text;
+
 		element.dispatchEvent(new Event('change', { bubbles: true }));
+		element.dispatchEvent(new Event('input', { bubbles: true }));
 	}
 
 	private typeCharToElement(element: HTMLInputElement, char: string): void {
@@ -191,7 +193,6 @@ export class DocumentFacade<P extends PageVar> {
 
 		element.value += char;
 
-		element.dispatchEvent(new Event('input', { bubbles: true }));
 		element.dispatchEvent(new KeyboardEvent('keyup', { key: char }));
 	}
 }
