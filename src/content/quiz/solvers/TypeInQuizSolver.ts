@@ -1,7 +1,8 @@
-import TypeInQuizAnswer from '../../jetpunk/answers/TypeInQuizAnswer';
+import TypeInQuizAnswer, { TypeIn } from '../../jetpunk/answers/TypeInQuizAnswer';
 import JetPunkConfig from '../../jetpunk/JetPunkConfig';
 import DefaultPageVar from '../../jetpunk/page-var/DefaultPageVar';
 import { DefaultQuizSolver } from './DefaultQuizSolver';
+import RandExp from 'randexp';
 
 export abstract class TypeInQuizSolver<A extends TypeInQuizAnswer> extends DefaultQuizSolver<
 	A,
@@ -14,7 +15,51 @@ export abstract class TypeInQuizSolver<A extends TypeInQuizAnswer> extends Defau
 	protected getAnswers(question: string): string[] {
 		return this.answers
 			.filter((answer) => answer.id === question)
-			.map((answer) => answer.display);
+			.flatMap((answer) => this.getAnswerStringsFromAnswer(answer));
+	}
+
+	protected getAnswerStringsFromAnswer(answer: TypeInQuizAnswer): string[] {
+		const answerStrings = [];
+
+		answerStrings.push(...this.getAnswerTypeIns(answer));
+
+		const displayMissingValue = this.getDisplayMissingValue(answer);
+		if (displayMissingValue) {
+			answerStrings.push(displayMissingValue);
+		}
+
+		answerStrings.push(answer.display);
+
+		return answerStrings;
+	}
+
+	protected getAnswerTypeIns(answer: TypeInQuizAnswer): string[] {
+		const typeIns = [];
+
+		for (const typeIn of answer.typeins ?? []) {
+			typeIns.push(this.getTypeInValue(typeIn));
+		}
+
+		return typeIns;
+	}
+
+	protected getTypeInValue(typeIn: TypeIn): string {
+		switch (typeIn.mode) {
+			case 's':
+				return typeIn.val;
+			case 'r':
+				return new RandExp(typeIn.val).gen();
+			default:
+				return '';
+		}
+	}
+
+	protected getDisplayMissingValue(answer: TypeInQuizAnswer): string | null {
+		const words = [...answer.display.matchAll(/\{([^}]+)\}/g)].map((m) => m[1]);
+
+		const joined = words.join(' ');
+
+		return joined === '' ? null : joined;
 	}
 
 	protected enterAnswer(answer: string): void {
