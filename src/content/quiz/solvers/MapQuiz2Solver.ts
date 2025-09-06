@@ -1,10 +1,14 @@
 import MapQuiz2Answer from '../../jetpunk/answers/MapQuiz2Answer';
 import JetPunkConfig from '../../jetpunk/JetPunkConfig';
+import DefaultPageVar from '../../jetpunk/page-var/DefaultPageVar';
 import { PageType } from '../../jetpunk/PageType';
 import { register } from '../quizSolverRegistry';
-import { QuizSolver } from './QuizSolver';
+import { DefaultQuizSolver } from './DefaultQuizSolver';
 
-export class MapQuiz2Solver extends QuizSolver<MapQuiz2Answer> {
+export class MapQuiz2Solver extends DefaultQuizSolver<
+	MapQuiz2Answer,
+	DefaultPageVar<MapQuiz2Answer>
+> {
 	protected getNextQuestion(index: number): string {
 		const optionalElementText = this.documentFacade.getTextOfElement(
 			JetPunkConfig.mapQuiz2CurrentQuestionSelector

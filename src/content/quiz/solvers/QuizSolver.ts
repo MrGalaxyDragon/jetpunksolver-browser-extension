@@ -1,12 +1,15 @@
 import { DocumentFacade } from '../../DocumentFacade';
 import Answer from '../../jetpunk/answers/Answer';
+import PageVar from '../../jetpunk/page-var/PageVar';
 
-export abstract class QuizSolver<A extends Answer> {
+export abstract class QuizSolver<A extends Answer, P extends PageVar> {
 	protected readonly answers: A[];
 
-	constructor(protected readonly documentFacade: DocumentFacade<A>) {
-		this.answers = this.documentFacade.getAnswers();
+	constructor(protected readonly documentFacade: DocumentFacade<P>) {
+		this.answers = this.getQuestions();
 	}
+
+	protected abstract getQuestions(): A[];
 
 	public solve(): boolean {
 		let solved = true;

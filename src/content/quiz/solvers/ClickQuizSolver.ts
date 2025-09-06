@@ -1,10 +1,14 @@
 import ClickQuizAnswer from '../../jetpunk/answers/ClickQuizAnswer';
 import JetPunkConfig from '../../jetpunk/JetPunkConfig';
+import DefaultPageVar from '../../jetpunk/page-var/DefaultPageVar';
 import { PageType } from '../../jetpunk/PageType';
 import { register } from '../quizSolverRegistry';
-import { QuizSolver } from './QuizSolver';
+import { DefaultQuizSolver } from './DefaultQuizSolver';
 
-export class ClickQuizSolver extends QuizSolver<ClickQuizAnswer> {
+export class ClickQuizSolver extends DefaultQuizSolver<
+	ClickQuizAnswer,
+	DefaultPageVar<ClickQuizAnswer>
+> {
 	protected getNextQuestion(index: number): string {
 		return this.answers[index].id;
 	}
@@ -14,7 +18,7 @@ export class ClickQuizSolver extends QuizSolver<ClickQuizAnswer> {
 	}
 
 	private getAnswer(question: string): string {
-		const answer = this.documentFacade.getAnswers().find((answer) => answer.id === question);
+		const answer = this.answers.find((answer) => answer.id === question);
 		if (!answer) {
 			return '';
 		}

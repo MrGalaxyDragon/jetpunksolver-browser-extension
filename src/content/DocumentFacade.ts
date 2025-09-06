@@ -1,9 +1,8 @@
-import Answer from './jetpunk/answers/Answer';
 import JetPunkConfig from './jetpunk/JetPunkConfig';
-import PageVar from './jetpunk/PageVar';
+import PageVar from './jetpunk/page-var/PageVar';
 
-export class DocumentFacade<A extends Answer> {
-	private pageVar: PageVar<A> | undefined;
+export class DocumentFacade<P extends PageVar> {
+	private pageVar: P | undefined;
 
 	constructor(private readonly document: Document) {}
 
@@ -128,17 +127,13 @@ export class DocumentFacade<A extends Answer> {
 		);
 	}
 
-	public getAnswers(): A[] {
-		return this.getPageVar().data.quiz.answers;
-	}
-
-	public getPageVar(): PageVar<A> {
+	public getPageVar(): P {
 		this.pageVar ??= this.findPageVar();
 
 		return this.pageVar;
 	}
 
-	private findPageVar(): PageVar<A> {
+	private findPageVar(): P {
 		const scriptTags = this.document.getElementsByTagName('script');
 		const pattern = /_page = (.*);/;
 
@@ -148,7 +143,7 @@ export class DocumentFacade<A extends Answer> {
 			if (matches && matches.length > 1) {
 				const pageVarString = matches[1];
 				const pageVarObject = JSON.parse(pageVarString);
-				return pageVarObject as PageVar<A>;
+				return pageVarObject as P;
 			}
 		}
 

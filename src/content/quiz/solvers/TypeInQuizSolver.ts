@@ -1,15 +1,18 @@
 import TypeInQuizAnswer from '../../jetpunk/answers/TypeInQuizAnswer';
 import JetPunkConfig from '../../jetpunk/JetPunkConfig';
-import { QuizSolver } from './QuizSolver';
+import DefaultPageVar from '../../jetpunk/page-var/DefaultPageVar';
+import { DefaultQuizSolver } from './DefaultQuizSolver';
 
-export abstract class TypeInQuizSolver<A extends TypeInQuizAnswer> extends QuizSolver<A> {
+export abstract class TypeInQuizSolver<A extends TypeInQuizAnswer> extends DefaultQuizSolver<
+	A,
+	DefaultPageVar<A>
+> {
 	protected getNextQuestion(index: number): string {
 		return this.answers[index].id;
 	}
 
 	protected getAnswers(question: string): string[] {
-		return this.documentFacade
-			.getAnswers()
+		return this.answers
 			.filter((answer) => answer.id === question)
 			.map((answer) => answer.display);
 	}
