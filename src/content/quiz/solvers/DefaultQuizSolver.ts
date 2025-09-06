@@ -9,4 +9,8 @@ export abstract class DefaultQuizSolver<
 	protected getQuestions(): A[] {
 		return this.documentFacade.getPageVar().data.quiz.answers;
 	}
+
+	protected endQuiz(): void {}
+
+	protected moveToNextQuestion(): void {}
 }

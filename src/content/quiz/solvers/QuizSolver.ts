@@ -15,7 +15,13 @@ export abstract class QuizSolver<A extends Answer, P extends PageVar> {
 		let solved = true;
 		for (let i = 0; i < this.answers.length; i++) {
 			const question = this.getNextQuestion(i);
-			if (!this.solveQuestion(question)) {
+			if (this.solveQuestion(question)) {
+				if (i == this.answers.length - 1) {
+					this.endQuiz();
+				} else {
+					this.moveToNextQuestion();
+				}
+			} else {
 				solved = false;
 			}
 		}
@@ -40,4 +46,8 @@ export abstract class QuizSolver<A extends Answer, P extends PageVar> {
 	protected abstract enterAnswer(answer: string): void;
 
 	protected abstract isQuestionSolved(question: string, answers: string[]): boolean;
+
+	protected abstract endQuiz(): void;
+
+	protected abstract moveToNextQuestion(): void;
 }
