@@ -1,8 +1,7 @@
 import { DocumentFacade } from '../../DocumentFacade';
-import Answer from '../../jetpunk/answers/Answer';
 import PageVar from '../../jetpunk/page-var/PageVar';
 
-export abstract class QuizSolver<A extends Answer, P extends PageVar> {
+export abstract class QuizSolver<A, P extends PageVar> {
 	protected readonly answers: A[];
 
 	constructor(protected readonly documentFacade: DocumentFacade<P>) {
@@ -11,7 +10,7 @@ export abstract class QuizSolver<A extends Answer, P extends PageVar> {
 
 	protected abstract getQuestions(): A[];
 
-	public solve(): boolean {
+	public async solve(): Promise<boolean> {
 		let solved = true;
 		for (let i = 0; i < this.answers.length; i++) {
 			const question = this.getNextQuestion(i);

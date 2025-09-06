@@ -14,8 +14,8 @@ const startButtonHolderStyles: Partial<CSSStyleDeclaration> = {
 	justifyContent: 'space-around'
 };
 
-export function createAutoSolveButton(): HTMLButtonElement {
-	const startButton = getStartButton();
+export function createAutoSolveButton(startButtonQuerySelector: string): HTMLButtonElement {
+	const startButton = getStartButton(startButtonQuerySelector);
 
 	const autoSolveButton = copyStartButton(startButton);
 	setAttributes(autoSolveButton);
@@ -24,15 +24,15 @@ export function createAutoSolveButton(): HTMLButtonElement {
 	modifyStartButtonHolder(startButton, autoSolveButton);
 
 	copyStyles(
-		`${JetPunkConfig.gameGroupSelector} ${JetPunkConfig.startButtonQuerySelector}`,
+		`${JetPunkConfig.gameGroupSelector} ${startButtonQuerySelector}`,
 		`${JetPunkConfig.gameGroupSelector} #${autoSolveButtonConfig.attributes.id}`
 	);
 
 	return autoSolveButton;
 }
 
-function getStartButton(): HTMLButtonElement {
-	const startButton = document.querySelector(JetPunkConfig.startButtonQuerySelector);
+function getStartButton(startButtonQuerySelector: string): HTMLButtonElement {
+	const startButton = document.querySelector(startButtonQuerySelector);
 
 	if (startButton instanceof HTMLButtonElement) {
 		return startButton;

@@ -1,12 +1,28 @@
 import { createAutoSolveButton } from './autoSolveButton';
 import { DocumentFacade } from './DocumentFacade';
-import JetPunkConfig from './jetpunk/JetPunkConfig';
+import getStartButtonQuerySelector from './jetpunk/getStartButtonQuerySelector';
 import { createSolver } from './quiz/quizSolverFactory';
 
-createAutoSolveButton().addEventListener('click', function () {
-	const documentFacade = new DocumentFacade(document);
-	const solver = createSolver(documentFacade);
-	documentFacade.clickElement(JetPunkConfig.startButtonQuerySelector);
-	const isSolved = solver.solve();
-	console.log('Quiz was' + (isSolved ? '' : ' not') + ' solved successfully');
+let isLoaded = false;
+
+document.addEventListener('readystatechange', (e) => {
+	if (document.readyState === 'complete') {
+		loaded();
+	}
 });
+
+function loaded() {
+	if (isLoaded) return;
+
+	isLoaded = true;
+
+	const documentFacade = new DocumentFacade(document);
+	const startButtonQuerySelector = getStartButtonQuerySelector(documentFacade);
+
+	createAutoSolveButton(startButtonQuerySelector).addEventListener('click', async function () {
+		const solver = createSolver(documentFacade);
+		documentFacade.clickElement(startButtonQuerySelector);
+		const isSolved = await solver.solve();
+		console.log('Quiz was' + (isSolved ? '' : ' not') + ' solved successfully');
+	});
+}
