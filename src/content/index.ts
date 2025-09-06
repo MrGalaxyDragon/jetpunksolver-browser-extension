@@ -14,15 +14,23 @@ document.addEventListener('readystatechange', (e) => {
 function loaded() {
 	if (isLoaded) return;
 
-	isLoaded = true;
+	try {
+		isLoaded = true;
 
-	const documentFacade = new DocumentFacade(document);
-	const startButtonQuerySelector = getStartButtonQuerySelector(documentFacade);
+		const documentFacade = new DocumentFacade(document);
+		const startButtonQuerySelector = getStartButtonQuerySelector(documentFacade);
 
-	createAutoSolveButton(startButtonQuerySelector).addEventListener('click', async function () {
-		const solver = createSolver(documentFacade);
-		documentFacade.clickElement(startButtonQuerySelector);
-		const isSolved = await solver.solve();
-		console.log('Quiz was' + (isSolved ? '' : ' not') + ' solved successfully');
-	});
+		createAutoSolveButton(startButtonQuerySelector).addEventListener(
+			'click',
+			async function () {
+				const solver = createSolver(documentFacade);
+				documentFacade.clickElement(startButtonQuerySelector);
+				const isSolved = await solver.solve();
+				console.log('Quiz was' + (isSolved ? '' : ' not') + ' solved successfully');
+			}
+		);
+	} catch (err) {
+		console.warn('An error occured', err);
+		isLoaded = false;
+	}
 }
