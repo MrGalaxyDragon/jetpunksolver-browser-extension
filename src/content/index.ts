@@ -14,10 +14,11 @@ document.addEventListener('readystatechange', (e) => {
 function loaded() {
 	if (isLoaded) return;
 
-	try {
-		isLoaded = true;
+	isLoaded = true;
 
-		const documentFacade = new DocumentFacade(document);
+	const documentFacade = new DocumentFacade(document);
+
+	if (documentFacade.isPageVarLoaded()) {
 		const startButtonQuerySelector = getStartButtonQuerySelector(documentFacade);
 
 		createAutoSolveButton(startButtonQuerySelector).addEventListener(
@@ -29,8 +30,7 @@ function loaded() {
 				console.log('Quiz was' + (isSolved ? '' : ' not') + ' solved successfully');
 			}
 		);
-	} catch (err) {
-		console.warn('An error occured', err);
+	} else {
 		isLoaded = false;
 	}
 }

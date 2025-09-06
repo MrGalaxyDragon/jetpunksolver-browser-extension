@@ -150,6 +150,16 @@ export class DocumentFacade<P extends PageVar> {
 		throw new Error('Variable "_page" not found in any "script" tag');
 	}
 
+	public isPageVarLoaded(): boolean {
+		try {
+			this.findPageVar();
+			return true;
+		} catch (err) {
+			console.info(err);
+			return false;
+		}
+	}
+
 	public getTextOfElement(querySelector: string): string | undefined {
 		const element = this.document.querySelector(querySelector);
 		if (element) {
