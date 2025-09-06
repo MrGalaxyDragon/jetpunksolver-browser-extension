@@ -2,8 +2,11 @@ import { registry } from './quizSolverRegistry';
 import * as QuizSolvers from './solvers/nonAbstractQuizSolvers';
 import { DocumentFacade } from '../DocumentFacade';
 import { QuizSolver } from './solvers/QuizSolver';
+import PageVar from '../jetpunk/page-var/PageVar';
 
-export function createSolver(documentFacade: DocumentFacade): QuizSolver {
+export function createSolver(
+	documentFacade: DocumentFacade<PageVar>
+): QuizSolver<unknown, PageVar> {
 	loadSolvers();
 
 	const pageVar = documentFacade.getPageVar();
