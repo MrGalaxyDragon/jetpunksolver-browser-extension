@@ -24,7 +24,7 @@ export class DailyTriviaQuizSolver extends QuizSolver<
 	}
 
 	protected getNextQuestion(index: number): string {
-		const optionalElementText = this.documentFacade.getTextOfElement(
+		const optionalElementText = this.documentFacade.getInnerHtmlOfElement(
 			JetPunkConfig.dailyQuizCurrentQuestionSelector
 		);
 		return optionalElementText ?? '';

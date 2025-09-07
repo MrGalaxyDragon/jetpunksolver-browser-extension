@@ -160,6 +160,13 @@ export class DocumentFacade<P extends PageVar> {
 		}
 	}
 
+	public getInnerHtmlOfElement(querySelector: string): string | undefined {
+		const element = this.document.querySelector(querySelector);
+		if (element) {
+			return element.innerHTML.trim();
+		}
+	}
+
 	public getTextOfElement(querySelector: string): string | undefined {
 		const element = this.document.querySelector(querySelector);
 		if (element) {
