@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const targetDir = path.resolve(__dirname, 'dist');
+const targetDir = path.resolve(__dirname, '../dist');
 
 function removeEmptyDirs(dir) {
 	if (!fs.existsSync(dir)) return;
