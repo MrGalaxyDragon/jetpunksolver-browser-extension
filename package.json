@@ -10,7 +10,7 @@
 		"check-format": "prettier --check . && eslint && tsc -noEmit",
 		"fix-format": "prettier --write .",
 		"build": "npm run esbuild && npm run copy-assets && npm run remove-empty-directories",
-		"esbuild": "node scripts/build.js",
+		"esbuild": "node scripts/build.cjs",
 		"copy-assets": "node scripts/copy-assets.cjs",
 		"remove-empty-directories": "node scripts/remove-empty-directories.cjs"
 	},
