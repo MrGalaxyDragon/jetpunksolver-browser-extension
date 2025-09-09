@@ -3,8 +3,8 @@ const path = require('path');
 
 const excludedExtensions = ['.ts', '.js'];
 
-const srcDir = path.resolve(__dirname, 'src');
-const distDir = path.resolve(__dirname, 'dist');
+const srcDir = path.resolve(__dirname, '../src');
+const distDir = path.resolve(__dirname, '../dist');
 
 function copyRecursive(src, dest) {
 	if (!fs.existsSync(src)) return;
