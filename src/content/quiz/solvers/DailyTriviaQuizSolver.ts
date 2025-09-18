@@ -31,10 +31,15 @@ export class DailyTriviaQuizSolver extends QuizSolver<
 	}
 
 	protected getAnswers(question: string): string[] {
+		const transformedQuestion = this.convertTextToMarkup(question);
 		return this.answers
-			.filter((answer) => answer.question === question)
+			.filter((answer) => this.convertTextToMarkup(answer.question) === transformedQuestion)
 			.map((answer) => answer.correctChoice)
 			.map((choice) => JetPunkConfig.dailyQuizAnswerSelectorPrefix + choice);
+	}
+
+	private convertTextToMarkup(text: string): string {
+		return this.documentFacade.convertTextToMarkup(text);
 	}
 
 	protected enterAnswer(answer: string): void {

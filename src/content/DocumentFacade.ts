@@ -17,6 +17,13 @@ export class DocumentFacade<P extends PageVar> {
 		}
 	}
 
+	public convertTextToMarkup(text: string): string {
+		const el = document.createElement('textarea');
+		// eslint-disable-next-line no-unsanitized/property
+		el.innerHTML = text;
+		return el.value;
+	}
+
 	public doesElementExist(querySelector: string): boolean {
 		return this.document.querySelector(querySelector) !== null;
 	}
