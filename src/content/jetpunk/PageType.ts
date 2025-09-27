@@ -7,7 +7,8 @@ export const PageType = {
 	PHOTO_GAME: 'photo-game',
 	SUDDEN_DEATH_GAME: 'sd-game',
 	TEXT_GAME: 'text-game',
-	TILE_GAME: 'tile-game'
+	TILE_GAME: 'tile-game',
+	WORD_SEARCH_PAGE: 'word-search-page'
 } as const;
 
 export type PageType = (typeof PageType)[keyof typeof PageType];
