@@ -25,7 +25,9 @@ function loaded() {
 			'click',
 			async function () {
 				const solver = createSolver(documentFacade);
-				documentFacade.clickElement(startButtonQuerySelector);
+				if (startButtonQuerySelector) {
+					documentFacade.clickElement(startButtonQuerySelector);
+				}
 				const isSolved = await solver.solve();
 				console.log('Quiz was' + (isSolved ? '' : ' not') + ' solved successfully');
 			}

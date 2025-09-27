@@ -5,9 +5,11 @@ import { PageType } from './PageType';
 
 export default function getStartButtonQuerySelector(
 	documentFacade: DocumentFacade<PageVar>
-): string {
+): string | null {
 	const pageVar = documentFacade.getPageVar();
-	if (pageVar.pageType === PageType.DAILY_GAME) {
+	if (pageVar.pageType === PageType.WORD_SEARCH_PAGE) {
+		return null;
+	} else if (pageVar.pageType === PageType.DAILY_GAME) {
 		return JetPunkConfig.dailyQuizStartButtonQuerySelector;
 	} else {
 		return JetPunkConfig.startButtonQuerySelector;

@@ -14,7 +14,28 @@ const startButtonHolderStyles: Partial<CSSStyleDeclaration> = {
 	justifyContent: 'space-around'
 };
 
-export function createAutoSolveButton(startButtonQuerySelector: string): HTMLButtonElement {
+export function createAutoSolveButton(startButtonQuerySelector: string | null): HTMLButtonElement {
+	if (startButtonQuerySelector) {
+		return createAutoSolveButtonFromStartButton(startButtonQuerySelector);
+	} else {
+		return createAutoSolveButtonWithoutStartButton();
+	}
+}
+
+function createAutoSolveButtonWithoutStartButton(): HTMLButtonElement {
+	const autoSolveButton = document.createElement('button');
+	setAttributes(autoSolveButton);
+	autoSolveButton.textContent = autoSolveButtonConfig.text;
+
+	const holder = document.querySelector('.buttons');
+	if (holder) {
+		holder.appendChild(autoSolveButton);
+	}
+
+	return autoSolveButton;
+}
+
+function createAutoSolveButtonFromStartButton(startButtonQuerySelector: string): HTMLButtonElement {
 	const startButton = getStartButton(startButtonQuerySelector);
 
 	const autoSolveButton = copyStartButton(startButton);
