@@ -1,11 +1,14 @@
 export default {
 	startButtonQuerySelector: '#start-button',
 	gameGroupSelector: '.game-group',
+
 	textAnswerInputBoxSelector: '#txt-answer-box',
 	typeInQuizAttributeName: 'data-answer',
 	typeInQuizCorrectAnswerSelector: '.correct',
+
 	clickQuizAnswerSelectorPrefix: '#bubble-',
 	clickQuizCorrectAnswerSelector: '.green',
+
 	dailyQuizStartButtonQuerySelector: '#btn-start',
 	dailyQuizStartDelayInterval: 500,
 	dailyQuizCurrentQuestionSelector: '.question-holder .question .question-text',
@@ -14,16 +17,21 @@ export default {
 	dailyQuizCorrectAnswerSelector: '.correct',
 	dailyQuizNextQuestionButtonSelector: '#btn-next',
 	dailyQuizFinishButtonSelector: '#btn-finish',
+
 	mapQuizAnswerSelectorPrefix: '#map-answer-',
+
 	mapQuiz2CurrentQuestionSelector: '#map-header-text',
 	mapQuiz2AnswerSelectorPrefix: '#grid .svg-holder #',
 	mapQuiz2CorrectAnswerSelector: '.svg-correct',
 	mapQuiz2PointInPathSearchAttempts: 1000,
+
 	multipleChoiceQuizAnswerSelectorPrefix: '#choice-button-',
 	multipleChoiceQuizFinishButtonSelector: '.finish-mc',
+
 	suddenDeathQuizAnswerSelectorPrefix: '[data-id="',
 	suddenDeathQuizAnswerSelectorSuffix: '"]',
 	suddenDeathQuizCorrectAnswerSelector: '.green',
+
 	tileSelectQuizCurrentQuestionSelectorPrefix: '#questions-holder > div:nth-of-type(',
 	tileSelectQuizCurrentQuestionSelectorSuffix: ') .question-text',
 	tileSelectQuizAnswerSelectorPrefix: '#tile-',
