@@ -105,12 +105,14 @@ export class WordSearchSolver extends QuizSolver<WordSearchWord, WordSearchPageV
 	protected solveQuestion(question: string): boolean {
 		const answers = this.getAnswers(question);
 
-		if (answers.length != 2) return false;
+		if (answers.length < 2 || answers.length % 2 != 0) return false;
 
-		const start = answers[0];
-		const end = answers[1];
+		for (let i = 0; i < answers.length / 2; i++) {
+			const start = answers[2 * i];
+			const end = answers[2 * i + 1];
 
-		this.documentFacade.clickElementMoveToNextClickNext(start, end);
+			this.documentFacade.clickElementMoveToNextClickNext(start, end);
+		}
 
 		return this.isQuestionSolved(question, answers);
 	}
