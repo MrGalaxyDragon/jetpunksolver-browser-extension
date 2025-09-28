@@ -73,7 +73,7 @@ export class DocumentFacade<P extends PageVar> {
 	}
 
 	public convertTextToMarkup(text: string): string {
-		const el = document.createElement('textarea');
+		const el = this.document.createElement('textarea');
 		// eslint-disable-next-line no-unsanitized/property
 		el.innerHTML = text;
 		return el.value;
@@ -114,7 +114,7 @@ export class DocumentFacade<P extends PageVar> {
 	}
 
 	private createCanvas(bbox: DOMRect): CanvasRenderingContext2D | null {
-		const canvas = document.createElement('canvas');
+		const canvas = this.document.createElement('canvas');
 		canvas.width = Math.ceil(bbox.width);
 		canvas.height = Math.ceil(bbox.height);
 		return canvas.getContext('2d');
