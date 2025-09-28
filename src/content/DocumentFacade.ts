@@ -12,8 +12,63 @@ export class DocumentFacade<P extends PageVar> {
 
 	public clickElement(querySelector: string): void {
 		const element = this.document.querySelector(querySelector);
+		if (element) {
+			this.clickAnyElement(element);
+		}
+	}
+
+	private clickAnyElement(element: Element): void {
 		if (element instanceof HTMLElement) {
 			element.click();
+		} else {
+			const rect = element.getBoundingClientRect();
+
+			element.dispatchEvent(
+				new MouseEvent('click', {
+					view: window,
+					bubbles: true,
+					cancelable: true,
+					clientX: rect.x,
+					clientY: rect.y
+				})
+			);
+		}
+	}
+
+	public clickElementMoveToNextClickNext(start: string, end: string): void {
+		const element1 = this.document.querySelector(start);
+		const element2 = this.document.querySelector(end);
+
+		if (element1 && element2) {
+			this.clickAnyElement(element1);
+
+			this.moveFromElementToElement(element1, element2);
+
+			this.clickAnyElement(element2);
+		}
+	}
+
+	private moveFromElementToElement(element1: Element, element2: Element): void {
+		const startRect = element1.getBoundingClientRect();
+		const endRect = element2.getBoundingClientRect();
+
+		const startX = startRect.left + startRect.width / 2;
+		const startY = startRect.top + startRect.height / 2;
+		const endX = endRect.left + endRect.width / 2;
+		const endY = endRect.top + endRect.height / 2;
+
+		const steps = 10;
+		for (let i = 1; i <= steps; i++) {
+			const x = startX + (endX - startX) * (i / steps);
+			const y = startY + (endY - startY) * (i / steps);
+
+			this.document.elementFromPoint(x, y)?.dispatchEvent(
+				new MouseEvent('mousemove', {
+					bubbles: true,
+					clientX: x,
+					clientY: y
+				})
+			);
 		}
 	}
 

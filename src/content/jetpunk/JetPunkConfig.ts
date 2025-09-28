@@ -29,5 +29,8 @@ export default {
 	tileSelectQuizAnswerSelectorPrefix: '#tile-',
 	tileSelectQuizNextQuestionButtonSelectorPrefix: '#question-',
 	tileSelectQuizNextQuestionButtonSelectorSuffix: '.ts-question .btn-next',
-	tileSelectQuizFinishButtonSelector: '.finish-tile'
+	tileSelectQuizFinishButtonSelector: '.finish-tile',
+
+	wordSearchPageCorrectAnswerSelectorPrefix: '[data-id="',
+	wordSearchPageCorrectAnswerSelectorSuffix: '"].done'
 };
