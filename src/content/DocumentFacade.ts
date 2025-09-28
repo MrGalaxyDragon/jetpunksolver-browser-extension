@@ -17,19 +17,22 @@ export class DocumentFacade<P extends PageVar> {
 		}
 	}
 
-	private clickAnyElement(element: Element): void {
+	private clickAnyElement(element: Element, x?: number, y?: number): void {
 		if (element instanceof HTMLElement) {
 			element.click();
 		} else {
 			const rect = element.getBoundingClientRect();
+
+			x = x ?? rect.x;
+			y = y ?? rect.y;
 
 			element.dispatchEvent(
 				new MouseEvent('click', {
 					view: window,
 					bubbles: true,
 					cancelable: true,
-					clientX: rect.x,
-					clientY: rect.y
+					clientX: x,
+					clientY: y
 				})
 			);
 		}
@@ -178,15 +181,7 @@ export class DocumentFacade<P extends PageVar> {
 		x: number,
 		y: number
 	): void {
-		svgElement.dispatchEvent(
-			new MouseEvent('click', {
-				view: window,
-				bubbles: true,
-				cancelable: true,
-				clientX: x,
-				clientY: y
-			})
-		);
+		this.clickAnyElement(svgElement, x, y);
 	}
 
 	public getPageVar(): P {
