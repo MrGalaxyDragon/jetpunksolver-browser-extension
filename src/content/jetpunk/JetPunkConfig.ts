@@ -2,7 +2,7 @@ export default {
 	startButtonQuerySelector: '#start-button',
 	gameGroupSelector: '.game-group',
 
-	textAnswerInputBoxSelector: '#txt-answer-box',
+	typeInQuizInputBoxSelector: '#txt-answer-box',
 	typeInQuizAttributeName: 'data-answer',
 	typeInQuizCorrectAnswerSelector: '.correct',
 

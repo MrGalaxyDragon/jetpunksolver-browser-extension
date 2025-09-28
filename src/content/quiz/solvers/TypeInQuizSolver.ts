@@ -63,8 +63,8 @@ export abstract class TypeInQuizSolver<A extends TypeInQuizAnswer> extends Defau
 	}
 
 	protected enterAnswer(answer: string): void {
-		this.documentFacade.typeToElement(JetPunkConfig.textAnswerInputBoxSelector, answer);
-		this.documentFacade.clearElement(JetPunkConfig.textAnswerInputBoxSelector);
+		this.documentFacade.typeToElement(JetPunkConfig.typeInQuizInputBoxSelector, answer);
+		this.documentFacade.clearElement(JetPunkConfig.typeInQuizInputBoxSelector);
 	}
 
 	protected isQuestionSolved(question: string, answers: string[]): boolean {
