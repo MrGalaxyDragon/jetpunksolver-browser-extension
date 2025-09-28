@@ -96,6 +96,7 @@ function modifyStartButtonHolder(
 	if (!startButtonHolder) throw new Error('Start Button Parent Element was not found.');
 
 	for (const [key, value] of Object.entries(startButtonHolderStyles)) {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		(startButtonHolder.style as any)[key] = value;
 	}
 
