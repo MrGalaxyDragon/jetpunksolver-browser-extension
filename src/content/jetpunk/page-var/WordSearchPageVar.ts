@@ -3,13 +3,16 @@ import PageVar from './PageVar';
 
 export default interface WordSearchPageVar extends PageVar {
 	data: {
-		puzzle: {
-			grid: string;
-			words: {
-				[key: string]: WordSearchWord;
-			};
-			width: number;
-			height: number;
-		};
+		puzzle: Puzzle;
 	};
+}
+
+export interface Puzzle {
+	shape: 'sq' | 'hex';
+	grid: string;
+	words: {
+		[key: string]: WordSearchWord;
+	};
+	width: number;
+	height: number;
 }

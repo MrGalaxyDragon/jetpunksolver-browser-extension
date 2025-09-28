@@ -1,7 +1,7 @@
 import { DocumentFacade } from '../../DocumentFacade';
 import WordSearchWord, { WordSearchOrientations } from '../../jetpunk/answers/WordSearchWord';
 import JetPunkConfig from '../../jetpunk/JetPunkConfig';
-import WordSearchPageVar from '../../jetpunk/page-var/WordSearchPageVar';
+import WordSearchPageVar, { Puzzle } from '../../jetpunk/page-var/WordSearchPageVar';
 import { PageType } from '../../jetpunk/PageType';
 import { register } from '../quizSolverRegistry';
 import { QuizSolver } from './QuizSolver';
@@ -11,23 +11,84 @@ interface Coordinates {
 	y: number;
 }
 
+interface CharacterAndIndex {
+	character: string;
+	index: number;
+}
+
 export class WordSearchSolver extends QuizSolver<WordSearchWord, WordSearchPageVar> {
-	private readonly gridMatrix: string[][];
+	private readonly gridMatrix: CharacterAndIndex[][];
+	private readonly isHexQuiz: boolean;
 
 	constructor(protected readonly documentFacade: DocumentFacade<WordSearchPageVar>) {
 		super(documentFacade);
-		this.gridMatrix = this.createGridMatrix();
+		const puzzle = this.documentFacade.getPageVar().data.puzzle;
+		this.isHexQuiz = puzzle.shape === 'hex';
+		this.gridMatrix = this.createGridMatrix(puzzle);
 	}
 
-	private createGridMatrix(): string[][] {
-		const puzzle = this.documentFacade.getPageVar().data.puzzle;
+	private createGridMatrix(puzzle: Puzzle): CharacterAndIndex[][] {
+		if (this.isHexQuiz) {
+			return this.createHexagonGridMatrix(puzzle);
+		} else {
+			return this.createSquareGridMatrix(puzzle);
+		}
+	}
+
+	private createHexagonGridMatrix(puzzle: Puzzle): CharacterAndIndex[][] {
 		const grid = puzzle.grid;
+
+		const height = puzzle.height;
+		const heightCenter = (height + 1) / 2;
+		const width = puzzle.width;
+		const increasedWidth = width * 2 - 1;
+
+		let indexInWord = 0;
+
+		const gridMatrix = [];
+		for (let i = 0; i < height; i++) {
+			const row: CharacterAndIndex[] = [];
+			gridMatrix.push(row);
+
+			const heightDistanceToCenter = Math.abs(heightCenter - i - 1);
+			for (let j = 0; j < increasedWidth; j++) {
+				let entry;
+
+				if (
+					j >= heightDistanceToCenter &&
+					j < increasedWidth - heightDistanceToCenter &&
+					j % 2 == heightDistanceToCenter % 2
+				) {
+					entry = {
+						character: grid.charAt(indexInWord),
+						index: indexInWord++
+					};
+				} else {
+					entry = {
+						character: '',
+						index: -1
+					};
+				}
+
+				row.push(entry);
+			}
+		}
+		return gridMatrix;
+	}
+
+	private createSquareGridMatrix(puzzle: Puzzle): CharacterAndIndex[][] {
+		const grid = puzzle.grid;
+
 		const gridMatrix = [];
 		for (let i = 0; i < puzzle.height; i++) {
-			const row: string[] = [];
+			const row: CharacterAndIndex[] = [];
 			gridMatrix.push(row);
 			for (let j = 0; j < puzzle.width; j++) {
-				row.push(grid.charAt(i * puzzle.width + j));
+				const index = i * puzzle.width + j;
+				row.push({
+					character: grid.charAt(index),
+					index
+				});
 			}
 		}
 		return gridMatrix;
@@ -67,10 +128,17 @@ export class WordSearchSolver extends QuizSolver<WordSearchWord, WordSearchPageV
 				to: this.getEndingLetterCoordinates(word, coordinates)
 			}))
 			.filter((fromTo) => fromTo.to !== null)
-			.flatMap((fromTo) => [
-				`[id="${fromTo.from.x}-${fromTo.from.y}"]`,
-				`[id="${fromTo.to?.x}-${fromTo.to?.y}"]`
-			]);
+			.flatMap((fromTo) =>
+				this.isHexQuiz
+					? [
+							`[id="${this.gridMatrix[fromTo.from.y][fromTo.from.x].index}"]`,
+							`[id="${this.gridMatrix[fromTo.to!.y][fromTo.to!.x].index}"]`
+						]
+					: [
+							`[id="${fromTo.from.x}-${fromTo.from.y}"]`,
+							`[id="${fromTo.to!.x}-${fromTo.to!.y}"]`
+						]
+			);
 	}
 
 	private getStartingLetterCoordinates(word: WordSearchWord): Coordinates[] {
@@ -78,7 +146,7 @@ export class WordSearchSolver extends QuizSolver<WordSearchWord, WordSearchPageV
 		const coordinates = [];
 		for (let i = 0; i < this.gridMatrix.length; i++) {
 			for (let j = 0; j < this.gridMatrix[i].length; j++) {
-				if (this.gridMatrix[i][j] === startingLetter) {
+				if (this.gridMatrix[i][j].character === startingLetter) {
 					coordinates.push({
 						x: j,
 						y: i
@@ -138,14 +206,16 @@ export class WordSearchSolver extends QuizSolver<WordSearchWord, WordSearchPageV
 	): Coordinates | null {
 		const length = word.length;
 
+		const horizontalFactor = this.isHexQuiz && orientation.y == 0 ? 2 : 1;
+
 		for (let i = 0; i < length; i++) {
-			const x = startingLetterCoordinates.x + i * orientation.x;
+			const x = startingLetterCoordinates.x + i * orientation.x * horizontalFactor;
 			const y = startingLetterCoordinates.y + i * orientation.y;
 
 			if (
 				!this.isCoordinateValid(y, this.gridMatrix.length) ||
 				!this.isCoordinateValid(x, this.gridMatrix[y].length) ||
-				this.gridMatrix[y][x] !== word.charAt(i)
+				this.gridMatrix[y][x].character !== word.charAt(i)
 			) {
 				break;
 			}
