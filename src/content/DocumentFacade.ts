@@ -96,28 +96,52 @@ export class DocumentFacade<P extends PageVar> {
 		}
 	}
 
-	public emulateClickOnSvgPathElement(querySelector: string): void {
+	public emulateClickOnSvgElement(querySelector: string): void {
 		const element = this.document.querySelector(querySelector);
-		if (element instanceof SVGPathElement) {
+		if (element instanceof SVGGraphicsElement) {
 			const svgElement = element.ownerSVGElement;
 			if (!svgElement) return;
 
-			const coordinates = this.getPathPageCoordinates(element, svgElement);
+			const coordinates = this.getSvgElementPageCoordinates(element, svgElement);
 			if (coordinates) {
 				this.executeClickOnSvgElementWithPosition(svgElement, coordinates.x, coordinates.y);
 			}
 		}
 	}
 
-	private getPathPageCoordinates(
-		path: SVGPathElement,
+	private getSvgElementPageCoordinates(
+		element: SVGGraphicsElement,
 		svg: SVGSVGElement
 	): { x: number; y: number } | null {
-		const bbox = path.getBBox();
+		const bbox = element.getBBox();
 
-		const ctm = path.getScreenCTM();
+		const ctm = element.getScreenCTM();
 		if (!ctm) return null;
 
+		if (element instanceof SVGPathElement) {
+			return this.getPathCoordinates(svg, bbox, ctm, element);
+		} else {
+			return this.getSvgCoordinates(svg, bbox, ctm);
+		}
+	}
+
+	private getSvgCoordinates(
+		svg: SVGSVGElement,
+		bbox: DOMRect,
+		ctm: DOMMatrix
+	): { x: number; y: number } {
+		const px = bbox.x + 0.5 * bbox.width;
+		const py = bbox.y + 0.5 * bbox.height;
+
+		return this.calculateCoordinates(svg, ctm, px, py);
+	}
+
+	private getPathCoordinates(
+		svg: SVGSVGElement,
+		bbox: DOMRect,
+		ctm: DOMMatrix,
+		path: SVGPathElement
+	): { x: number; y: number } | null {
 		const ctx = this.createCanvas(bbox);
 		if (!ctx) return null;
 
