@@ -67,7 +67,11 @@ export abstract class TypeInQuizSolver<A extends TypeInQuizAnswer> extends Defau
 		this.documentFacade.clearElement(JetPunkConfig.typeInQuizInputBoxSelector);
 	}
 
-	protected isQuestionSolved(question: string, answers: string[]): boolean {
+	protected isQuestionSolved(
+		questionIndex: number,
+		question: string,
+		answers: string[]
+	): boolean {
 		return this.documentFacade.doesElementExist(
 			`[${JetPunkConfig.typeInQuizAttributeName}="${question}"]${JetPunkConfig.typeInQuizCorrectAnswerSelector}`
 		);

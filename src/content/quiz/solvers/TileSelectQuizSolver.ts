@@ -49,7 +49,11 @@ export class TileSelectQuizSolver extends QuizSolver<
 		this.documentFacade.clickElement(answer);
 	}
 
-	protected isQuestionSolved(question: string, answers: string[]): boolean {
+	protected isQuestionSolved(
+		questionIndex: number,
+		question: string,
+		answers: string[]
+	): boolean {
 		return false;
 	}
 

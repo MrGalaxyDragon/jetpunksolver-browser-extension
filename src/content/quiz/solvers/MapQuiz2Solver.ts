@@ -27,7 +27,11 @@ export class MapQuiz2Solver extends DefaultQuizSolver<
 		this.documentFacade.emulateClickOnSvgPathElement(answer);
 	}
 
-	protected isQuestionSolved(question: string, answers: string[]): boolean {
+	protected isQuestionSolved(
+		questionIndex: number,
+		question: string,
+		answers: string[]
+	): boolean {
 		return answers.some((answer) =>
 			this.documentFacade.doesElementExist(
 				answer + JetPunkConfig.mapQuiz2CorrectAnswerSelector

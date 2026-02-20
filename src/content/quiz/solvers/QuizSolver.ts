@@ -14,7 +14,7 @@ export abstract class QuizSolver<A, P extends PageVar> {
 		let solved = true;
 		for (let i = 0; i < this.answers.length; i++) {
 			const question = this.getNextQuestion(i);
-			if (!this.solveQuestion(question)) {
+			if (!this.solveQuestion(i, question)) {
 				solved = false;
 			}
 
@@ -29,11 +29,11 @@ export abstract class QuizSolver<A, P extends PageVar> {
 
 	protected abstract getNextQuestion(index: number): string;
 
-	protected solveQuestion(question: string): boolean {
+	protected solveQuestion(questionIndex: number, question: string): boolean {
 		const answers = this.getAnswers(question);
 		for (const answer of answers) {
 			this.enterAnswer(answer);
-			if (this.isQuestionSolved(question, answers)) {
+			if (this.isQuestionSolved(questionIndex, question, answers)) {
 				return true;
 			}
 		}
@@ -44,7 +44,11 @@ export abstract class QuizSolver<A, P extends PageVar> {
 
 	protected abstract enterAnswer(answer: string): void;
 
-	protected abstract isQuestionSolved(question: string, answers: string[]): boolean;
+	protected abstract isQuestionSolved(
+		questionIndex: number,
+		question: string,
+		answers: string[]
+	): boolean;
 
 	protected abstract endQuiz(): void;
 

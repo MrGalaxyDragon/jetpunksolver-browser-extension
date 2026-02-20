@@ -30,7 +30,11 @@ export class MapQuizSolver extends DefaultQuizSolver<MapQuizAnswer, MapQuizPageV
 		this.documentFacade.clickElement(answer);
 	}
 
-	protected isQuestionSolved(question: string, answers: string[]): boolean {
+	protected isQuestionSolved(
+		questionIndex: number,
+		question: string,
+		answers: string[]
+	): boolean {
 		const acceptedAnswers = answers.filter(
 			(answer) => !this.documentFacade.doesElementExist(answer)
 		);

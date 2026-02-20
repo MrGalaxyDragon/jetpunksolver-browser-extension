@@ -46,7 +46,11 @@ export class DailyTriviaQuizSolver extends QuizSolver<
 		this.documentFacade.clickElement(answer + JetPunkConfig.dailyQuizAnswerSelectorSuffix);
 	}
 
-	protected isQuestionSolved(question: string, answers: string[]): boolean {
+	protected isQuestionSolved(
+		questionIndex: number,
+		question: string,
+		answers: string[]
+	): boolean {
 		return answers.some((answer) =>
 			this.documentFacade.doesElementExist(
 				answer + JetPunkConfig.dailyQuizCorrectAnswerSelector

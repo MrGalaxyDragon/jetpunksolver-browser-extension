@@ -29,7 +29,11 @@ export class ClickQuizSolver extends DefaultQuizSolver<
 		this.documentFacade.clickElement(answer);
 	}
 
-	protected isQuestionSolved(question: string, answers: string[]): boolean {
+	protected isQuestionSolved(
+		questionIndex: number,
+		question: string,
+		answers: string[]
+	): boolean {
 		return this.documentFacade.doesElementExist(
 			`${this.getAnswer(question)}${JetPunkConfig.clickQuizCorrectAnswerSelector}`
 		);

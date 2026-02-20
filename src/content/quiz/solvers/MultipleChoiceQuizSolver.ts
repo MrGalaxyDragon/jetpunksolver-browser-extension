@@ -24,7 +24,11 @@ export class MultipleChoiceQuizSolver extends DefaultQuizSolver<
 		this.documentFacade.clickElement(answer);
 	}
 
-	protected isQuestionSolved(question: string, answers: string[]): boolean {
+	protected isQuestionSolved(
+		questionIndex: number,
+		question: string,
+		answers: string[]
+	): boolean {
 		return true;
 	}
 

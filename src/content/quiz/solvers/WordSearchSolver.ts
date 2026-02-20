@@ -102,7 +102,7 @@ export class WordSearchSolver extends QuizSolver<WordSearchWord, WordSearchPageV
 		return this.answers[index].id;
 	}
 
-	protected solveQuestion(question: string): boolean {
+	protected solveQuestion(questionIndex: number, question: string): boolean {
 		const answers = this.getAnswers(question);
 
 		if (answers.length < 2 || answers.length % 2 != 0) return false;
@@ -114,7 +114,7 @@ export class WordSearchSolver extends QuizSolver<WordSearchWord, WordSearchPageV
 			this.documentFacade.clickElementMoveToNextClickNext(start, end);
 		}
 
-		return this.isQuestionSolved(question, answers);
+		return this.isQuestionSolved(questionIndex, question, answers);
 	}
 
 	protected getAnswers(question: string): string[] {
@@ -236,7 +236,11 @@ export class WordSearchSolver extends QuizSolver<WordSearchWord, WordSearchPageV
 
 	protected enterAnswer(answer: string): void {}
 
-	protected isQuestionSolved(question: string, answers: string[]): boolean {
+	protected isQuestionSolved(
+		questionIndex: number,
+		question: string,
+		answers: string[]
+	): boolean {
 		return this.documentFacade.doesElementExist(
 			`${JetPunkConfig.wordSearchPageCorrectAnswerSelectorPrefix}${question}${JetPunkConfig.wordSearchPageCorrectAnswerSelectorSuffix}`
 		);
