@@ -233,30 +233,39 @@ export class DocumentFacade<P extends PageVar> {
 
 	public typeToElement(querySelector: string, text: string): void {
 		const element = this.document.querySelector(querySelector);
-		if (element instanceof HTMLInputElement) {
+		if (element instanceof HTMLElement) {
 			this.typeStringToElement(element, text);
 		}
 	}
 
-	private typeStringToElement(element: HTMLInputElement, text: string): void {
+	private typeStringToElement(element: HTMLElement, text: string): void {
 		if (text !== '') {
 			for (const char of text) {
 				this.typeCharToElement(element, char);
 			}
 		}
 
-		element.value = text;
+		if (element instanceof HTMLInputElement) {
+			element.value = text;
+		}
 
 		element.dispatchEvent(new Event('change', { bubbles: true }));
 		element.dispatchEvent(new Event('input', { bubbles: true }));
 	}
 
-	private typeCharToElement(element: HTMLInputElement, char: string): void {
-		element.dispatchEvent(new KeyboardEvent('keydown', { key: char }));
-		element.dispatchEvent(new KeyboardEvent('keypress', { key: char }));
+	private typeCharToElement(element: HTMLElement, char: string): void {
+		const eventInitDict = {
+			bubbles: true,
+			key: char
+		};
 
-		element.value += char;
+		element.dispatchEvent(new KeyboardEvent('keydown', eventInitDict));
+		element.dispatchEvent(new KeyboardEvent('keypress', eventInitDict));
 
-		element.dispatchEvent(new KeyboardEvent('keyup', { key: char }));
+		if (element instanceof HTMLInputElement) {
+			element.value += char;
+		}
+
+		element.dispatchEvent(new KeyboardEvent('keyup', eventInitDict));
 	}
 }
