@@ -86,6 +86,16 @@ export class DocumentFacade<P extends PageVar> {
 		return this.document.querySelector(querySelector) !== null;
 	}
 
+	public doesNthElementHaveClass(querySelector: string, n: number, className: string): boolean {
+		const elements = this.document.querySelectorAll(querySelector);
+		const element = elements.item(n);
+		if (element) {
+			return element.classList.contains(className);
+		} else {
+			return false;
+		}
+	}
+
 	public emulateClickOnSvgPathElement(querySelector: string): void {
 		const element = this.document.querySelector(querySelector);
 		if (element instanceof SVGPathElement) {

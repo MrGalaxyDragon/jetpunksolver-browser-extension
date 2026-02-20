@@ -39,6 +39,11 @@ export default {
 	tileSelectQuizNextQuestionButtonSelectorSuffix: '.ts-question .btn-next',
 	tileSelectQuizFinishButtonSelector: '.finish-tile',
 
+	typingSpeedTestStartButtonQuerySelector: '#btn-start',
+	typingSpeedTestInputQuerySelector: '#passage',
+	typingSpeedTestLetterQuerySelector: '#passage .letter',
+	typingSpeedTestLetterCorrectClass: 'letter-correct',
+
 	wordSearchPageCorrectAnswerSelectorPrefix: '[data-id="',
 	wordSearchPageCorrectAnswerSelectorSuffix: '"].done'
 };

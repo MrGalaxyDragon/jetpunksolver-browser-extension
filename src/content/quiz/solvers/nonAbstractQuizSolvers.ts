@@ -7,4 +7,5 @@ export * from './PictureQuizSolver';
 export * from './SuddenDeathQuizSolver';
 export * from './TextQuizSolver';
 export * from './TileSelectQuizSolver';
+export * from './TypingSpeedTestSolver';
 export * from './WordSearchSolver';

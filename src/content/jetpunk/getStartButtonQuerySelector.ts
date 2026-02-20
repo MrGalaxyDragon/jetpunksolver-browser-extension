@@ -9,6 +9,8 @@ export default function getStartButtonQuerySelector(
 	const pageVar = documentFacade.getPageVar();
 	if (pageVar.pageType === PageType.WORD_SEARCH_PAGE) {
 		return null;
+	} else if (pageVar.pageType === PageType.TYPING_SPEED_TEST) {
+		return JetPunkConfig.typingSpeedTestStartButtonQuerySelector;
 	} else if (pageVar.pageType === PageType.DAILY_GAME) {
 		return JetPunkConfig.dailyQuizStartButtonQuerySelector;
 	} else {
