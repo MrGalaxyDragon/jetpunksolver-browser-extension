@@ -165,12 +165,17 @@ export class WordSearchSolver extends QuizSolver<WordSearchWord, WordSearchPageV
 	): Coordinates | null {
 		const w = word.norm;
 
+		let answer = null;
 		if (word.orientation) {
-			return this.getEndingLetterCoordinatesWithOrientation(
+			answer = this.getEndingLetterCoordinatesWithOrientation(
 				startingLetterCoordinates,
 				w,
 				WordSearchOrientations[word.orientation]
 			);
+		}
+
+		if (answer) {
+			return answer;
 		} else {
 			return this.getEndingLetterCoordinatesByTryingEveryOrientation(
 				startingLetterCoordinates,
