@@ -1,13 +1,28 @@
+import { DocumentFacade } from '../../DocumentFacade';
 import TypeInQuizAnswer, { TypeIn } from '../../jetpunk/answers/TypeInQuizAnswer';
 import JetPunkConfig from '../../jetpunk/JetPunkConfig';
-import DefaultPageVar from '../../jetpunk/page-var/DefaultPageVar';
+import TypeInPageVar from '../../jetpunk/page-var/TypeInPageVar';
 import { DefaultQuizSolver } from './DefaultQuizSolver';
 import RandExp from 'randexp';
 
 export abstract class TypeInQuizSolver<A extends TypeInQuizAnswer> extends DefaultQuizSolver<
 	A,
-	DefaultPageVar<A>
+	TypeInPageVar<A>
 > {
+	private recommendedTypeins: string[] = [];
+
+	constructor(protected readonly documentFacade: DocumentFacade<TypeInPageVar<A>>) {
+		super(documentFacade);
+		this.recommendedTypeins = this.getRecommendedTypeins();
+	}
+
+	protected getRecommendedTypeins(): string[] {
+		const recommendedTypeins = this.documentFacade.getPageVar().data.recommendedTypeins ?? {};
+		return Object.values(recommendedTypeins)
+			.flatMap((typeins) => typeins)
+			.map((typein) => this.getTypeInValue(typein));
+	}
+
 	protected getNextQuestion(index: number): string {
 		return this.answers[index].id;
 	}
@@ -29,6 +44,8 @@ export abstract class TypeInQuizSolver<A extends TypeInQuizAnswer> extends Defau
 		}
 
 		answerStrings.push(answer.display);
+
+		this.recommendedTypeins.forEach((typein) => answerStrings.push(typein));
 
 		return answerStrings;
 	}
