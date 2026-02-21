@@ -23,8 +23,8 @@ export class DocumentFacade<P extends PageVar> {
 		} else {
 			const rect = element.getBoundingClientRect();
 
-			x = x ?? rect.x;
-			y = y ?? rect.y;
+			x = x ?? rect.x + 0.5 * rect.width;
+			y = y ?? rect.y + 0.5 * rect.height;
 
 			element.dispatchEvent(
 				new MouseEvent('click', {
