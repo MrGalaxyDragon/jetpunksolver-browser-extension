@@ -272,6 +272,11 @@ export class DocumentFacade<P extends PageVar> {
 		}
 	}
 
+	public resetScrollbars(): void {
+		window.scrollX = 0;
+		window.scrollY = 0;
+	}
+
 	private typeStringToElement(element: HTMLElement, text: string): void {
 		if (text !== '') {
 			for (const char of text) {

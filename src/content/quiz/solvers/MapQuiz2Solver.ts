@@ -24,6 +24,7 @@ export class MapQuiz2Solver extends DefaultQuizSolver<
 	}
 
 	protected enterAnswer(answer: string): void {
+		this.documentFacade.resetScrollbars();
 		this.documentFacade.emulateClickOnSvgElement(answer);
 	}
 
