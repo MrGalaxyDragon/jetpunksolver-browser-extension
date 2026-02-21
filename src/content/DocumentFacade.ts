@@ -241,6 +241,13 @@ export class DocumentFacade<P extends PageVar> {
 		throw new Error('Variable "_page" not found in any "script" tag');
 	}
 
+	public insertIntoElementThenGetText(str: string): string {
+		const template = this.document.createElement('template');
+		// eslint-disable-next-line no-unsanitized/property
+		template.innerHTML = str.trim();
+		return template.content.textContent;
+	}
+
 	public isPageVarLoaded(): boolean {
 		try {
 			this.findPageVar();

@@ -18,9 +18,13 @@ export class MapQuiz2Solver extends DefaultQuizSolver<
 
 	protected getAnswers(question: string): string[] {
 		return this.answers
-			.filter((answer) => answer.display === question)
+			.filter((answer) => this.isAnswerForQuestion(answer, question))
 			.map((answer) => answer.path)
 			.map((path) => JetPunkConfig.mapQuiz2AnswerSelectorPrefix + path);
+	}
+
+	private isAnswerForQuestion(answer: MapQuiz2Answer, question: string): boolean {
+		return this.documentFacade.insertIntoElementThenGetText(answer.display) === question;
 	}
 
 	protected enterAnswer(answer: string): void {
